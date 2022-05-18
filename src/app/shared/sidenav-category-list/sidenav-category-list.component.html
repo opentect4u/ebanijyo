@@ -1,0 +1,9 @@
+<div *ngFor="let category of adminCategories">
+    <button mat-menu-item (click)="changeCategory($event)" class="leftCatBtn">
+        <span id="{{category.id}}">{{category.cat_name}}</span>
+    </button>
+     <!-- <div *ngFor="let sub of category.sub_cat" class="sub-category">
+         <span style="cursor:pointer" class="subList" (click)="go_to_list(sub.id)">{{sub.sub_cat_name}}</span> -->
+        <!-- <app-category-list [categories]="categories" [categoryParentId]="category.id" (change)="changeCategory($event)"></app-category-list> -->
+     <!-- </div> -->
+</div>

@@ -1,0 +1,85 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+.shift_field{
+    margin-right: 5%;
+}
+.color_div{
+    margin-top: -20%;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}
+.field_measure{
+    width:20%;
+}
+mat-form-field.mat-form-field.ng-tns-c148-22.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-has-label.mat-form-field-hide-placeholder.ng-untouched.ng-pristine.ng-invalid.ng-star-inserted {
+  width: 67% !important;
+}
+
+mat-form-field.mat-form-field.ng-tns-c148-22.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-has-label.mat-form-field-hide-placeholder.ng-untouched.ng-pristine.ng-invalid.ng-star-inserted :focus{
+  width: 67% !important;
+}
+
+mat-form-field.mat-form-field.ng-tns-c148-22.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-has-label.ng-pristine.ng-invalid.ng-star-inserted.mat-form-field-invalid.ng-touched.mat-form-field-hide-placeholder {
+  width: 67% !important;
+}
+
+mat-form-field.mat-form-field.ng-tns-c148-23.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-has-label.mat-form-field-hide-placeholder.ng-untouched.ng-pristine.ng-valid.ng-star-inserted{
+  width:98%;
+}
+mat-form-field.mat-form-field.ng-tns-c148-24.mat-primary.mat-form-field-type-mat-input.mat-form-field-appearance-fill.mat-form-field-can-float.mat-form-field-has-label.mat-form-field-hide-placeholder.ng-untouched.ng-pristine.ng-valid.ng-star-inserted{
+  width:98%;
+
+}
+snack-bar-container.mat-snack-bar-container.ng-tns-c263-34.ng-trigger.ng-trigger-state.mat-snack-bar-center.ng-star-inserted{
+  background-color:#1976d2 !important;
+}
+#resetStep{
+  float:right;
+}
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+  background-color: rgb(160, 156, 156,0.5);
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.icon {
+  color: white;
+  font-size: 55px;
+  font-weight: lighter;
+  position: absolute;
+  top: 7%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}

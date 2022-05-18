@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div mat-dialog-content>
+        <div fxLayout="row wrap">
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Opening stock</mat-label>
+                    <input [readonly]="data.stock.opening_stock" matInput formControlName="ostock" autofocus required>
+                    <mat-error *ngIf="form.controls.ostock.errors?.required">Opening stock is required</mat-error> 
+                </mat-form-field>
+            </div> 
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Stock in hand</mat-label>
+                    <input readonly matInput formControlName="stockinHand" autofocus required>
+                    <mat-error *ngIf="form.controls.stockinHand.errors?.required">Stock in hand is required</mat-error> 
+                </mat-form-field>
+            </div> 
+            <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Stock entry</mat-label>
+                    <input matInput formControlName="entry" autofocus required>
+                    <mat-error *ngIf="form.controls.entry.errors?.required">Stock entry is required</mat-error> 
+                </mat-form-field>
+            </div> 
+            <!-- <div fxFlex="100">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Parent category</mat-label>
+                    <mat-select formControlName="parentId">
+                        <mat-option *ngFor="let cat of data.categories" [value]="cat.id">
+                            <span>{{cat.name}}</span>
+                        </mat-option>
+                    </mat-select> 
+                </mat-form-field>
+            </div>  -->
+            <!-- <div fxFlex="100" class="py-1">    
+                <mat-checkbox formControlName="hasSubCategory" color="primary">Has SubCategory</mat-checkbox>
+            </div>  -->
+        </div>
+    </div>
+    <div mat-dialog-actions>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100"> 
+            <button mat-raised-button color="warn" type="button" mat-dialog-close>Close</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </div> 
+    </div>
+</form>

@@ -1,0 +1,6 @@
+<div *ngFor="let type of adminTypes;let i=index" >
+   <button mat-menu-item (click)="showType(type.id)">
+        <span >{{type.type_name}}</span>
+    </button>
+   
+</div>

@@ -1,0 +1,144 @@
+<div style="float:right" fxLayout="row" fxLayoutAlign="space-between center">
+    <mat-button-toggle-group #viewType="matButtonToggleGroup" appearance="legacy" value="grid">
+        <mat-button-toggle (click)="changeView('grid')" value="grid">
+            <mat-icon>view_module</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle (click)="changeView('list')" value="list">
+            <mat-icon>view_list</mat-icon>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</div>
+
+<div *ngIf="viewGrid" fxLayout="row wrap">
+
+    <div *ngFor="let product of products | paginate: { itemsPerPage: count, currentPage: page }" fxFlex="100"
+        [fxFlex.gt-sm]="viewCol" fxFlex.sm="50" class="p-1">
+        <mat-card class="product-item text-center">
+            <mat-chip-list *ngIf="product.discount">
+                <mat-chip color="warn" selected="true">{{product.discount}}% OFF</mat-chip>
+            </mat-chip-list>
+            <img *ngIf="product.img_path" [src]="url+'/'+product.img_path" alt="">
+            <img *ngIf="!product.img_path" src="/assets/images/products/headset/2-medium.png" alt="">
+            <!-- <h4 class="category text-muted">{{ ( appService.Data.categories | filterById : product.categoryId )?.name }}</h4>                                                                      -->
+            <h4 class="category text-muted">{{product.cat_name}}</h4>
+            <div class="title text-truncate">
+                {{product.prod_name}}
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" class="prices">
+                <div fxLayout="column" fxLayoutAlign="center start">
+                    <p class="old-price text-muted"><span *ngIf="product.prod_sp!=product.offer_price">&#8377;{{product.prod_sp | number :
+                            '1.2-2'}}</span></p>
+                    <p class="new-price">&#8377;{{product.offer_price | number : '1.2-2'}}</p>
+                </div>
+                <!-- <app-rating [ratingsCount]="product.ratingsCount" [ratingsValue]="product.ratingsValue" [direction]="'column'"></app-rating> -->
+            </div>
+            <div class="divider mt-2"></div>
+            <div class="icons">
+                <a [routerLink]="['/admin/products/add-product', product.id]" mat-mini-fab color="primary"
+                    matTooltip="Edit">
+                    <mat-icon>edit</mat-icon>
+                </a>
+                <span class="px-1"> <a [routerLink]="['/admin/products/product-detail', product.id]" mat-mini-fab
+                        color="primary" matTooltip="View">
+                        <mat-icon>remove_red_eye</mat-icon>
+                    </a></span>
+                <button mat-mini-fab color="warn" matTooltip="Remove" (click)="remove(product)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="!viewGrid" fxLayout="row wrap">
+  
+    <div *ngFor="let product of products | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="p-1">
+        <mat-card class="p-0">
+            <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
+                <h3 class="user-name pl-2"> {{product.prod_name}}</h3>
+                <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+            </div>
+            <mat-menu #menu="matMenu" xPosition="before"  overlapTrigger="true">
+                <span (mouseleave)="menuTrigger.closeMenu()">
+                    <button mat-menu-item [routerLink]="['/admin/products/product-detail', product.id]">
+                        <mat-icon>mode_edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                   <button  mat-menu-item [routerLink]="['/admin/products/product-detail', product.id]">
+                    <mat-icon>remove_red_eye</mat-icon>
+                    <span>View</span>
+                   </button>
+                    
+                    <button mat-menu-item (click)="remove(product)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </span>
+            </mat-menu>
+            <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
+                <div fxFlex="20" fxFlex.xs="30" fxLayout="column">
+                    <!-- <mat-chip-list *ngIf="product.discount">
+                        <mat-chip color="warn" selected="true">{{product.discount}}% OFF</mat-chip>
+                    </mat-chip-list> -->
+                    <div class="user-img">
+                        <img height="50" width="50" *ngIf="product.img_path" [src]="url+'/'+product.img_path">
+                        <img height="50" width="50" *ngIf="!product.img_path" src="/assets/images/products/headset/2-medium.png">
+
+                    </div>
+
+                </div>
+             <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2" > 
+                    <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">texture</mat-icon>
+                            <span>{{product.cat_name}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">filter_none</mat-icon>
+                            <span>{{product.sub_cat_name}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">art_track</mat-icon>
+                            <span>{{product.type_name}}</span>
+                        </p>                                               
+                    </div>
+                    <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">person</mat-icon>
+                            <span>{{product.prod_vendor}}</span>
+                        </p> 
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">attach_money</mat-icon>
+                            <span class="old-price text-muted" *ngIf="product.prod_sp!=product.offer_price">${{product.prod_sp | number : '1.2-2'}} </span>&nbsp;<span class="new-price">{{product.discount}}% OFF </span> 
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                            <mat-icon class="text-muted">attach_money</mat-icon>
+                            <span class="new-price">${{product.offer_price | number : '1.2-2'}}</span>
+                        </p>                        
+                    </div>
+                    <!-- <div fxFlex="40" fxFlex.xs="100" fxLayout="column">
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                           
+                            <span>Registration {{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                        </p>
+                        <p fxLayout="row" fxLayoutAlign="start center">
+                           
+                            <span>Joined {{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
+                        </p> 
+                                         
+                    </div> -->
+                </div> 
+            </div>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="products.length > 0" fxLayout="row wrap">
+    <div fxFlex="100" class="p-1">
+        <mat-card class="p-0 text-center">
+            <pagination-controls class="product-pagination" autoHide="true" maxSize="5"
+                (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,294 @@
+<div class="p-1">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{(id) ? 'Edit' : 'Add New'}} Product</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-stepper [linear]="isLinear" #stepper id="stepper">
+        <mat-step [stepControl]="infoFormGroup">
+          <form [formGroup]="infoFormGroup">
+            <ng-template matStepLabel>Basic Info.</ng-template>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Category</mat-label>
+              <mat-select #catVal (selectionChange)="getSubs(catVal.value)" formControlName="cat_id">
+                <mat-option *ngFor="let cat of adminCategories" [value]="cat.id">
+                  {{cat.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Sub-Category</mat-label>
+              <mat-select #subVal (selectionChange)="getSubCat(subVal.value)" formControlName="subcat_id">
+                <mat-option *ngFor="let subcat of adminSubs" [value]="subcat.id">
+                  {{subcat.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Item Name</mat-label>
+              <input matInput formControlName="itemName" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>HSN Code</mat-label>
+              <input matInput formControlName="hsn_code" required [value]="getHSN">
+            </mat-form-field>
+
+            <div>
+              <button mat-raised-button color="primary" matStepperNext (click)="submitInfo()">Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="descFormGroup" label="Description">
+          <form [formGroup]="descFormGroup">
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Product Type</mat-label>
+              <mat-select #typeVal (selectionChange)="getType(typeVal.value)" formControlName="p_type">
+                <mat-option *ngFor="let p of adminTypes" [value]="p.id">
+                  {{p.type_name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Material</mat-label>
+              <mat-select #matVal (selectionChange)="getMat(matVal.value)" formControlName="materials">
+                <mat-option *ngFor="let mat of adminMaterials" [value]="mat.id">
+                  {{mat.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Color</mat-label>
+              <mat-select #colVal (selectionChange)="getCol(colVal.value)" formControlName="colors">
+                <mat-option *ngFor="let color of adminColors" [value]="color.id">
+                  <div class="row">
+                    <div class="col-8">
+                      {{color.color_name}}
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <!-- <div class="color_div" [ngStyle]="{'background-color':color.color_code}">
+
+                           </div> -->
+
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Weight</mat-label>
+              <input matInput formControlName="itemWeight" required [value]="getWeight">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="field_measure" style="width:8%;">
+              <mat-label>Height</mat-label>
+              <input matInput formControlName="itemHeight" required [value]="getHeight">
+            </mat-form-field>
+            x
+            <mat-form-field appearance="fill" style="width:8%;">
+              <mat-label>Width</mat-label>
+              <input matInput formControlName="itemWidth" required [value]="getWidth">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field" style="width:8%;">
+              <mat-label>Unit</mat-label>
+              <mat-select #uVal (selectionChange)="getUnit(uVal.value)" formControlName="unit">
+                <mat-option *ngFor="let u of units" [value]="u.id">
+                  {{u.value}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!-- <mat-form-field appearance="fill" style="width:67%;">
+              <mat-label>Vendor</mat-label>
+              <textarea cdkFocusInitial matInput formControlName="vendor" [value]="getVendor"></textarea>
+            </mat-form-field> -->
+            <mat-form-field appearance="fill" style="width:98%;">
+              <mat-label>History/About Artisan</mat-label>
+              <textarea matInput formControlName="history" [value]="getHistory"></textarea>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width:98%;">
+              <mat-label>Short Description</mat-label>
+              <textarea matInput formControlName="desc" [value]="getDesc"></textarea>
+            </mat-form-field>
+            <div>
+              <button mat-raised-button color="primary" matStepperPrevious class="shift_field">Back</button>
+              <button mat-raised-button color="primary" matStepperNext (click)="submitDesc()">Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="priceFormGroup">
+          <form [formGroup]="priceFormGroup">
+            <ng-template matStepLabel>Pricing</ng-template>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Cost Price</mat-label>
+              <input matInput formControlName="cp" required [value]="getCp">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Selling Price</mat-label>
+              <input id="sell_price" matInput formControlName="sp" required [value]="getSp">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Discount (%)</mat-label>
+              <input (change)="calc_dis($event)" id="discount_per" matInput formControlName="dis" required
+                [value]="getDis">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>Offer Price</mat-label>
+              <!-- <input readonly [value]="offer_price" matInput formControlName="op" [value]="getOp"> -->
+              <input readonly [value]="offer_price" matInput formControlName="op">
+
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>SGST (%)</mat-label>
+              <input matInput formControlName="sgst" required [value]="getSGST">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+              <mat-label>CGST (%)</mat-label>
+              <input matInput formControlName="cgst" required [value]="getCGST">
+            </mat-form-field>
+          
+            <div>
+              <button mat-raised-button color="primary" matStepperNext (click)="submitPrice()">Next</button>
+              <!-- <button *ngIf="!id" mat-raised-button id="resetStep"  color="warn" (click)="stepper.reset()">Reset</button> -->
+            </div>
+          </form>
+          <!-- <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div> -->
+        </mat-step>
+        <mat-step [stepControl]="imgFormGroup" label="Images">
+          <form [formGroup]="imgFormGroup">
+
+            <div fxFlex="40" class="px-2">
+              <p class="mt-1"><span class="uppercase fw-500">Gallery</span><span class="text-muted px-1">(max 6
+                  images)</span></p>
+              <input-file formControlName="images" fileLimit="6" fileAccept="image/*"></input-file>
+            </div>
+            <div *ngFor="let i of getImageData">
+
+              <div *ngIf="id" class="container" id="img_{{i.id}}">
+                <img height="100" width="100" clas="image" [src]="url+'/'+i.img_path" alt="">
+                <div class="overlay">
+                  <a style="cursor: pointer;" (click)="delete_img(i.id,i.img_path)" class="icon" title="User Profile">
+                    <mat-icon>close</mat-icon>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+            <div class="px-2">
+              <button mat-raised-button color="primary" matStepperNext (click)="submitData()">Submit</button>
+              <button *ngIf="!id" mat-raised-button id="resetStep" color="warn" (click)="stepper.reset()">Reset</button>
+            </div>
+
+          </form>
+        </mat-step>
+      </mat-stepper>
+      <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
+                <div fxFlex="40" class="px-2"> 
+                    <p class="mt-1"><span class="uppercase fw-500">Gallery</span><span class="text-muted px-1">(max 8 images)</span></p>  
+                    <input-file formControlName="images" fileLimit="8" fileAccept="image/*"></input-file>  
+                </div>
+                <div fxFlex="60" class="px-2">
+                    <div fxLayout="row wrap">
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Name</mat-label>
+                                <input matInput formControlName="name" required>
+                                <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
+                                <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 4 characters</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Category</mat-label>
+                                <mat-select formControlName="categoryId" required>
+                                    <mat-option *ngFor="let cat of categories" [value]="cat.id">
+                                        <span>{{cat.name}}</span>
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.controls.categoryId.errors?.required">Category is required</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Old Price</mat-label>
+                                <input matInput formControlName="oldPrice">
+                                <mat-error *ngIf="form.controls.oldPrice.errors?.required">Old Price is required</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>New Price</mat-label>
+                                <input matInput formControlName="newPrice" required>
+                                <mat-error *ngIf="form.controls.newPrice.errors?.required">New Price is required</mat-error>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Discount</mat-label>
+                                <input matInput formControlName="discount" type="number"> 
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="50" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Availibility Count</mat-label>
+                                <input matInput formControlName="availibilityCount" type="number"> 
+                            </mat-form-field>
+                        </div> 
+
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Color</mat-label>
+                                <mat-select formControlName="color" multiple  (selectionChange)="onColorSelectionChange($event)">
+                                    <mat-select-trigger>{{selectedColors}}</mat-select-trigger>
+                                    <mat-option *ngFor="let color of colors" [value]="color">
+                                        <div fxLayout="row" fxLayoutAlign="space-between center">
+                                            <span>{{color}}</span>
+                                            <mat-icon [style.color]="color">fiber_manual_record</mat-icon>
+                                        </div> 
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Size</mat-label>
+                                <mat-select formControlName="size" multiple>
+                                    <mat-option *ngFor="let size of sizes" [value]="size">
+                                        <span>{{size}}</span>
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> 
+                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Weight</mat-label>
+                                <input matInput formControlName="weight" type="number"> 
+                            </mat-form-field>
+                        </div> 
+
+                        <div fxFlex="100" class="px-1">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Description</mat-label> 
+                                <textarea matInput formControlName="description" rows="7"></textarea> 
+                            </mat-form-field> 
+                        </div> 
+                       
+
+
+                        <div fxFlex="100" class="mt-2 text-center w-100">
+                            <button mat-raised-button color="primary" type="submit">SUBMIT</button>
+                        </div>
+                    </div>
+                </div>
+            </form> -->
+    </mat-card-content>
+
+
+
+  </mat-card>
+</div>
+<!-- <button mat-stroked-button [hidden]="true">Show snack-bar</button> -->

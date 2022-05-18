@@ -1,0 +1,9 @@
+{
+    "/v1/*": {
+    "target": "https://api.razorpay.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "auth": "rzp_test_gzbFg6wah8kBqZ:z7iSdrkG1LVjgpW71KEG4XEq"
+    }
+ }

@@ -1,0 +1,6 @@
+<div *ngFor="let material of adminMaterials;let i=index" >
+    <button mat-menu-item (click)="showMaterial(material.id)">
+         <span >{{material.name}}</span>
+     </button>
+    
+ </div>

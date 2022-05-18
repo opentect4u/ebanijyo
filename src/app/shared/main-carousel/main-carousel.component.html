@@ -1,0 +1,23 @@
+<div class="main-slider">
+  <div class="swiper-container h-100" [swiper]="config">
+    <div class="swiper-wrapper h-100">      
+      <div *ngFor="let banner of bannerData" class="swiper-slide">
+        <div [attr.data-background]="imgurl+'/'+banner.img_path" [ngStyle]="{'background-image':'url('+imgurl+'/'+banner.img_path+')'}" class="slide-item swiper-lazy">
+
+         
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+          <!-- <div class=""></div> -->
+            <div class="mask"></div>  
+            <div fxLayout="column" fxLayoutAlign="center center" class="content">
+              <h1>{{banner.heading}}</h1>
+              <h3>{{banner.sub_heading}}</h3>
+              <a mat-raised-button color="primary" [routerLink]="[banner.page_url.split('https://ebanijya.opentech4u.co.in').join('')]">Shop now</a>
+            </div> 
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination white"></div>
+    <button mat-mini-fab color="primary" class="swiper-button-prev swipe-arrow"><mat-icon>keyboard_arrow_left</mat-icon></button>
+    <button mat-mini-fab color="primary" class="swiper-button-next swipe-arrow"><mat-icon>keyboard_arrow_right</mat-icon></button>
+  </div>
+</div>

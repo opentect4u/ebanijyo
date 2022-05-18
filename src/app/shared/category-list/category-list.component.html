@@ -1,0 +1,5 @@
+<div *ngFor="let category of adminCategories">
+    <button mat-menu-item (click)="changeCategory($event)" class="leftCatBtn">
+        <span id="{{category.id}}">{{category.cat_name}}</span>
+    </button>
+</div>

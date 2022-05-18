@@ -1,0 +1,34 @@
+<div class="mat-table orders-table">
+  <ng-container *ngFor="let order of tnx_data">
+    <h3>{{order.tnx_date}}</h3>
+    <div class="mat-header-row">
+      <div class="mat-header-cell">Order</div>
+      <div class="mat-header-cell">Date</div>
+      <div class="mat-header-cell">Product</div>
+      <div class="mat-header-cell">Status</div>
+      <div class="mat-header-cell">Total</div>
+      <!-- <div class="mat-header-cell"></div> -->
+    </div>
+    <div  class="mat-row" *ngFor="let entry of order.data">
+     
+     <!-- <ng-container *ngFor="let entry of order.data"> -->
+      <div class="mat-cell"><span class="order">{{entry.trans_no}}</span></div>
+      <div class="mat-cell">{{entry.trans_dt}}</div>
+      <div class="mat-cell">{{entry.prod_name}}</div>
+      <div class="mat-cell">{{entry.status}}</div>
+      <div class="mat-cell">{{entry.price*entry.qty | currency:"INR":"symbol"}}</div> 
+     <!-- </ng-container> -->
+          
+      <!-- <div class="mat-cell">
+        <div class="p-1 actions">          
+          <button mat-mini-fab color="primary" matTooltip="View">
+              <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button *ngIf="order.invoice" mat-mini-fab color="warn" matTooltip="View invoice" class="btn-invoice">
+              <mat-icon>receipt</mat-icon>
+          </button>
+        </div>
+      </div>       -->
+    </div>
+  </ng-container>
+  </div>

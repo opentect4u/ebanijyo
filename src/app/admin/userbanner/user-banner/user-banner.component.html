@@ -1,0 +1,93 @@
+<mat-form-field appearance="fill" style="width:100%">
+    <mat-label>Select one</mat-label>
+    <mat-select id="lala" #paramVal (selectionChange)="bannerdtls($event)">
+      <mat-option *ngFor="let param of paramData;let i=index;" [selected]="i==0" [value]="param.id+'/'+param.no_of_element">
+        {{param.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+<mat-accordion>
+     <mat-expansion-panel #matExpansionPanel [(expanded)]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title *ngIf="title"> Add {{title}} </mat-panel-title>
+            <mat-panel-description>
+
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <form [formGroup]="bannerFormGroup">
+
+            <mat-form-field appearance="fill" class="shift_field">
+                <mat-label>Heading</mat-label>
+                <input matInput formControlName="heading" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+                <mat-label>Sub-heading</mat-label>
+                <input matInput formControlName="subheading" required>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="shift_field">
+                <mat-label>Page URL</mat-label>
+                <input matInput formControlName="pg_url" required>
+            </mat-form-field>
+            <input type="file" (change)="upload($event)" formControlName="img" value="">
+            
+            <mat-card [hidden]="hideCard" class="example-card">
+             
+                <img id="imgPre" mat-card-image [src]="url+'/'+imgPath" alt="">
+               
+              </mat-card>
+
+            <!-- </div> -->
+            <div>
+                <button mat-raised-button color="primary" [disabled]="(limit<=bannerData.length || bannerData.length==0) && isEdit==false" (click)="submitBanner()">Submit</button>
+                <button mat-raised-button color="warn" style="float:right;" *ngIf="isEdit==false" (click)="bannerFormGroup.reset()">Reset</button>
+            </div>
+        </form>
+
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div class="mat-table admin-table">
+    <div class="mat-header-row">
+        <div class="mat-header-cell">ID</div>
+
+        <div class="mat-header-cell">Heading</div>
+        <div class="mat-header-cell">Sub-heading</div> 
+        <div class="mat-header-cell">Page URL</div> 
+        <div class="mat-header-cell"></div>
+        <div class="mat-header-cell"></div>
+        <!-- <div class="mat-header-cell"></div> -->
+    </div>
+    <!-- <div *ngFor="let cat of categories | paginate: { itemsPerPage: count, currentPage: page }; let i=index" class="mat-row"> -->
+        <div *ngFor="let banner of bannerData | paginate: { itemsPerPage: count, currentPage: page }; let i=index" class="mat-row">
+        <div class="mat-cell">{{i+1}}</div>
+        <div class="mat-cell">{{banner.heading}}</div>
+        <div class="mat-cell">{{banner.sub_heading}}</div>
+        <div class="mat-cell">{{banner.page_url}}</div>
+        <div class="mat-cell">
+           <img [src]="url+'/'+banner.img_path" height="50" width="50" alt="">
+        </div>
+        <div class="mat-cell">
+            <div class="p-1 actions">          
+                <button mat-mini-fab color="primary" matTooltip="Edit" (click)="edit(banner)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab color="warn" matTooltip="Delete" class="mx-1" (click)="remove(banner)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<!-- <div *ngIf="bannerData.length > 0" fxLayout="row wrap">
+    <div fxFlex="100" class="p-1">
+        <mat-card class="p-0 text-center">
+            <pagination-controls class="product-pagination" autoHide="true" maxSize="5"
+                (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div> -->
+<!-- This is the expansion title -->

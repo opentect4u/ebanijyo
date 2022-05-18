@@ -1,0 +1,64 @@
+<div class="banners-container" fxLayout="column" fxLayout.gt-sm="row" *ngIf="banners.length > 0">
+    <div fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="40">
+        <div class="banner" fxFlex="50" fxFlex.gt-sm="67" [ngStyle]= "{'background-image': 'url(' + bannerImg[0] + ')'}">
+            <div class="info" fxLayoutAlign="start start">
+                <div class="px-2" fxLayout="column" fxLayoutAlign="center center">
+                    <h1 class="title">{{bannerData[0].heading}}</h1>
+                    <h3 class="subtitle">{{bannerData[0].sub_heading}}</h3>
+                    <a [routerLink]="[this.bannerData[0].page_url.split('https://ebanijya.opentech4u.co.in').join('')]" mat-raised-button color="primary" class="mt-2">Shop now</a>
+                </div> 
+            </div> 
+        </div>
+        <div fxLayout="row" fxFlex="50" fxFlex.gt-sm="33">
+            <div class="banner" fxFlex [ngStyle]="{'background-image': 'url(' + bannerImg[1] + ')'}">
+                <div class="info" fxLayoutAlign="center center">
+                    <div class="px-2" fxLayout="column" fxLayoutAlign="end center">
+                      <h2 class="title">{{bannerData[1].heading}}</h2>
+                      <h4 class="subtitle">{{bannerData[1].sub_heading}}</h4>
+                      <a [routerLink]="[this.bannerData[1].page_url.split('https://ebanijya.opentech4u.co.in').join('')]" mat-raised-button color="primary" class="mt-2">Shop now</a>
+                    </div> 
+                </div> 
+            </div>
+            <div class="banner" fxFlex [ngStyle]="{'background-image': 'url(' + bannerImg[2] + ')'}">
+                <div class="info" fxFlex fxLayoutAlign="center center">
+                    <div class="px-2" fxLayout="column" fxLayoutAlign="end center">
+                      <h2 class="title">{{bannerData[2].heading}}</h2>
+                      <h4 class="subtitle">{{bannerData[2].sub_heading}}</h4>
+                      <a [routerLink]="[this.bannerData[2].page_url.split('https://ebanijya.opentech4u.co.in').join('')]" mat-raised-button color="primary" class="mt-2">Shop now</a>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayout.gt-sm="column" fxLayout.xs="column" fxFlex="100" fxFlex.gt-sm="60">
+        <div fxLayout="row" fxFlexOrder="2" fxFlexOrder.gt-sm="1" fxFlex="50" fxFlex.gt-sm="33">
+            <div class="banner" fxFlex [ngStyle]="{'background-image': 'url(' + bannerImg[3] + ')'}">
+                <div class="info" fxLayoutAlign="space-around center">
+                    <div class="px-2" fxLayout="column" fxLayoutAlign="end center">
+                      <h2 class="title">{{bannerData[3].heading}}</h2>
+                      <h4 class="subtitle">{{bannerData[3].sub_heading}}</h4>
+                      <a [routerLink]="[this.bannerData[3].page_url.split('https://ebanijya.opentech4u.co.in').join('')]" mat-raised-button color="primary" class="mt-2">Shop now</a>
+                    </div>                    
+                </div>
+            </div>
+            <div class="banner" fxFlex [ngStyle]="{'background-image': 'url(' + bannerImg[4] + ')'}">
+                <div class="info" fxLayoutAlign="center center">
+                    <div class="px-2" fxLayout="column" fxLayoutAlign="end center">
+                      <h2 class="title">{{bannerData[4].heading}}</h2>
+                      <h4 class="subtitle">{{bannerData[4].sub_heading}}</h4>
+                      <a [routerLink]="[this.bannerData[4].page_url.split('https://ebanijya.opentech4u.co.in').join('')]" mat-raised-button color="primary" class="mt-2">Shop now</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="banner" fxFlexOrder="1" fxFlexOrder.gt-sm="2" fxFlex="50" fxFlex.gt-sm="67" [ngStyle]="{'background-image': 'url(' + bannerImg[5] + ')'}">
+            <div class="info" fxLayout="column" fxLayoutAlign="center end">
+                <div class="px-2" fxLayout="column" fxLayoutAlign="center center">
+                  <h1 class="title">{{bannerData[5].heading}}</h1>
+                  <h3 class="subtitle">{{bannerData[5].sub_heading}}</h3>
+                  <a [routerLink]="[this.bannerData[5].page_url.split('https://ebanijya.opentech4u.co.in').join('')]" mat-raised-button color="primary" class="mt-2">Shop now</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>
